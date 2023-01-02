@@ -8,6 +8,12 @@
     "stylelint-order",
     "stylelint-scss"
   ],
+  "overrides": [
+    {
+      "files": ["**/*.{vue,html}"],
+      "customSyntax": "postcss-html"
+    }
+  ],
   "rules": {
     "selector-pseudo-class-no-unknown": [
       true,
