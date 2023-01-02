@@ -19,6 +19,6 @@ export default {
 };
 </script>
 
-<style>
-@import './index.scss';
+<style lang="scss">
+@import './index';
 </style>

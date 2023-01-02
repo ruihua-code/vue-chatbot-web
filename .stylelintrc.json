@@ -25,6 +25,7 @@
     ],
     "scss/at-rule-no-unknown": null,
     "max-line-length": 150,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "string-quotes":"single"
   }
 }
