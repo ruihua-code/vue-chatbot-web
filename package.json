@@ -1,5 +1,6 @@
 {
-  "name": "vue-demo",
+  "name": "vue-three-template",
+  "description": "vue 3.x版本项目模板,vite 4.x打包构建",
   "version": "0.0.0",
   "private": true,
   "scripts": {
