@@ -1,28 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <Test></Test>
+    <router-link to="/home">Home</router-link>
   </div>
 </template>
 <script lang="ts">
-import Test from './home/index.vue';
+import { login } from '@/api/login';
 export default {
-  components: {
-    Test,
-  },
+  components: {},
   data() {
     return {
       msg: 'hello',
     };
   },
+  mounted() {},
 };
 </script>
-<style>
-@media (min-width: 1024px) {
-  .about {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-  }
-}
-</style>

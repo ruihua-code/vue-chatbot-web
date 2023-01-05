@@ -1,9 +1,23 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue';
+<script lang="ts">
+import { login } from '@/api/login';
+
+export default {
+  methods: {
+    onLogin() {
+      login({
+        username: 'zrh',
+        phone: '15510051902',
+      }).then((res) => {
+        console.log(res);
+      });
+    },
+  },
+};
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <RouterLink to="/about">About</RouterLink>
+    <ElButton type="primary" @click="onLogin">登录</ElButton>
   </main>
 </template>
