@@ -41,3 +41,18 @@ yarn dev
 ```bash
 yarn build
 ```
+
+### git commit提交
+
+* type:[
+  'build', 'chore', 'ci', 'docs', 'feat', 'fix',
+  'perf', 'refactor', 'revert', 'style', 'test'
+]
+
+
+```bash
+
+git commit -m "fix: some message"
+git commit -m "fix(scope): some Message" 
+
+```
