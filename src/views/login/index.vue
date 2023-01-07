@@ -2,11 +2,11 @@
   <div class="page-container">
     <div class="login">
       <div class="header">登录</div>
-      <el-form v-model="formData" label-width="60px">
-        <el-form-item label="用户名" prop="user">
+      <el-form :model="formData" label-width="60px">
+        <el-form-item label="用户名">
           <el-input v-model="formData.user" type="text" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <el-form-item label="密码">
           <el-input v-model="formData.password" type="password" autocomplete="off" />
         </el-form-item>
         <el-form-item>
