@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { splitVendorChunkPlugin } from 'vite';
 
+import ElementPlus from 'unplugin-element-plus/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
@@ -29,6 +30,13 @@ export default defineConfig({
       },
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/default.scss" as *;`,
+      },
+    },
+  },
   plugins: [
     vue(),
     splitVendorChunkPlugin(),
@@ -37,6 +45,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    ElementPlus({
+      useSource: true,
     }),
   ],
   resolve: {
