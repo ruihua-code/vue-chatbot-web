@@ -56,3 +56,14 @@ git commit -m "fix: some message"
 git commit -m "fix(scope): some Message" 
 
 ```
+
+
+### windows 和 mac git add . 问题
+```bash
+warning: in the working copy of 'auto-imports.d.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components.d.ts', LF will be replaced by CRLF the next time Git touches it
+
+#提交时转换为LF，检出时转换为CRLF
+git config --global core.autocrlf true
+
+```
