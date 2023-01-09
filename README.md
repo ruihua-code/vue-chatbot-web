@@ -42,6 +42,16 @@ yarn dev
 yarn build
 ```
 
+### SvgIcon组件
+1. 将svg文件放到src/assets/icons目录
+2. 直接使用：```<SvgIcon name='svg文件名称' />```
+   
+```html
+<SvgIcon name="logo"></SvgIcon>
+<SvgIcon name="logo" width="30px" height="30px"></SvgIcon>
+```
+
+
 ### git commit提交
 
 * type:[
