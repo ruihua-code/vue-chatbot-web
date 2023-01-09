@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <div class="login">
+    <div class="login fade-in">
       <div class="header">登录</div>
       <el-form :model="formData" label-width="60px">
         <el-form-item label="用户名">
