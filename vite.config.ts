@@ -11,7 +11,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
 
-const port = 8080;
+const port = 8082;
 const base = '/demo/';
 console.log('当前环境:', process.env.NODE_ENV);
 
