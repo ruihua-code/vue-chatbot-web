@@ -1,23 +1,12 @@
-<script lang="ts">
-import { login } from '@/api/login';
+<script setup lang="ts">
+import { useNow, useDateFormat } from '@vueuse/core';
 
-export default {
-  methods: {
-    onLogin() {
-      login({
-        username: 'zrh',
-        phone: '15510051902',
-      }).then((res) => {
-        console.log(res);
-      });
-    },
-  },
-};
+const formatted = useDateFormat(useNow(), 'YYYY-MM-DD HH:mm:ss');
 </script>
 
 <template>
   <main>
     <RouterLink to="/about">About</RouterLink>
-    <ElButton type="primary" @click="onLogin">登录</ElButton>
+    <div>{{ formatted }}</div>
   </main>
 </template>
