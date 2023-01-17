@@ -1,8 +1,9 @@
 <template>
-  <canvas ref="canvasEle" class="canvas" />
+  <canvas ref="canvasEle" class="canvas"></canvas>
 </template>
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+
 const props = defineProps<{
   width: number;
   height: number;
@@ -13,7 +14,7 @@ const box = {
   height: 512,
 };
 
-const duration = 0.1;
+const duration = 0.2;
 let ctx = ref().value;
 let canvasEle = ref();
 
@@ -31,7 +32,7 @@ onMounted(async () => {
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
   ctx.lineWidth = '1';
-  ctx.fillStyle = '#fff';
+  ctx.fillStyle = 'rgba(0,0,0,0)';
   ctx.fillRect(0, 0, canvasEle.value.width, canvasEle.value.height);
 
   await onLeft();

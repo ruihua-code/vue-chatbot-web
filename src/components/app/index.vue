@@ -3,7 +3,7 @@
     <el-aside class="aside fade-in" width="200px">
       <div class="logo">
         <!-- <SvgIcon name="logo" width="36px" height="36px" /> -->
-        <Logo width="36px" height="36px"></Logo>
+        <Logo :width="36" :height="36" />
         <span class="project-name">知识中心</span>
       </div>
       <SideMenu></SideMenu>
@@ -15,14 +15,18 @@
 </template>
 <script lang="ts" setup>
 import SideMenu from '@/components/side-menu/index.vue';
+import variables from '@/assets/styles/variables.module.scss'
+console.log("----",variables.sideMenuBackgroundColor)
 </script>
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.module';
+
 .container {
   height: 100vh;
 
   .aside {
     height: 100vh;
-    background-color: #545c64;
+    background-color: $side-bg-color;
 
     .logo {
       display: flex;

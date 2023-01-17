@@ -1,0 +1,19 @@
+// 1young logo蓝色
+$primary-color: #1b98d3;
+
+// 1young logo绿色
+$green-color: #7db62c;
+$side-bg-color: #545c64;
+
+.primarCcolor {
+  color: $primary-color;
+}
+
+// 侧边菜单背景色
+.sideMenuBackgroundColor {
+  color: $side-bg-color;
+}
+
+.greenColor {
+  color: $green-color;
+}

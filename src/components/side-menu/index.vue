@@ -1,7 +1,7 @@
 <template>
   <el-menu
     default-active="2"
-    background-color="#545c64"
+    :background-color="data.bgColor"
     active-text-color="#ffd04b"
     text-color="#fff"
     class="el-menu-vertical-demo"
@@ -45,7 +45,15 @@
   </el-menu>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 import { Document, Location, Setting } from '@element-plus/icons-vue';
+import variables from '@/assets/styles/variables.module.scss';
+
+const data = ref({
+  bgColor: variables.sideMenuBackgroundColor,
+});
+console.log('variables', variables);
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
