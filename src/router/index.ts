@@ -11,38 +11,18 @@ const router = createRouter({
     },
     {
       path: '/app',
-      name: '权限控制',
-      component: AppView,
+      name: '主结构页面',
+      component: () => import('@/components/app/index.vue'),
       children: [
         {
-          path: '/app/home',
-          name: '首页',
-          component: () => import('../views/home/index.vue'),
+          path: '/app/file',
+          name: '文件列表',
+          component: () => import('@/views/file/index.vue'),
         },
         {
-          path: '/app/task',
-          name: '任务',
-          component: () => import('../views/task/index.vue'),
-        },
-        {
-          path: '/app/annotation',
-          name: '标注',
-          component: () => import('../views/annotation/index.vue'),
-        },
-        {
-          path: '/app/check',
-          name: '审核',
-          component: () => import('../views/check/index.vue'),
-        },
-        {
-          path: '/app/statistic',
-          name: '统计',
-          component: () => import('../views/statistic/index.vue'),
-        },
-        {
-          path: '/app/setting',
-          name: '管理',
-          component: () => import('../views/setting/index.vue'),
+          path: '/app/apply',
+          name: '我的申请',
+          component: () => import('@/views/apply/index.vue'),
         },
       ],
     },

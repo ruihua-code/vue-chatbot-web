@@ -1,103 +1,61 @@
 <template>
-  <div class="menus">
-    <SvgIcon name="logo" width="50px" height="50px"></SvgIcon>
+  <el-menu
+    default-active="2"
+    background-color="#545c64"
+    active-text-color="#ffd04b"
+    text-color="#fff"
+    class="el-menu-vertical-demo"
+    @open="handleOpen"
+    @close="handleClose">
+    <el-sub-menu index="1">
+      <template #title>
+        <el-icon><location /></el-icon>
+        <span>文件列表</span>
+      </template>
+      <el-menu-item index="1-1">上传文件</el-menu-item>
+      <el-menu-item index="1-2">下载文件</el-menu-item>
+    </el-sub-menu>
 
-    <div class="menu">
-      <router-link class="menu-item" v-for="menu in menus" :key="menu.name" :to="menu.path">
-        <el-icon :size="26" color="#adadad"><component :is="menu.icon" /></el-icon>
-        <span>{{ menu.name }}</span>
-      </router-link>
-    </div>
-  </div>
+    <el-sub-menu index="2">
+      <template #title>
+        <el-icon><location /></el-icon>
+        <span>我的申请</span>
+      </template>
+      <el-menu-item index="2-1">申请记录</el-menu-item>
+      <el-menu-item index="2-2">申请管理</el-menu-item>
+    </el-sub-menu>
+
+    <el-sub-menu index="3">
+      <template #title>
+        <el-icon><document /></el-icon>
+        <span>表管理</span>
+      </template>
+      <el-menu-item index="3-1">申请记录</el-menu-item>
+      <el-menu-item index="3-2">申请管理</el-menu-item>
+    </el-sub-menu>
+
+    <el-sub-menu index="4">
+      <template #title>
+        <el-icon><setting /></el-icon>
+        <span>字段管理</span>
+      </template>
+      <el-menu-item index="4-1">字段列表</el-menu-item>
+      <el-menu-item index="4-2">字段导入</el-menu-item>
+    </el-sub-menu>
+  </el-menu>
 </template>
 <script lang="ts" setup>
-import { HomeFilled, List, Postcard, Checked, TrendCharts, Tools } from '@element-plus/icons-vue';
-import { shallowRef } from 'vue';
-
-const menus = shallowRef([
-  {
-    name: '首页',
-    icon: HomeFilled,
-    path: '/app/home',
-  },
-  {
-    name: '任务',
-    icon: List,
-    path: '/app/task',
-  },
-  {
-    name: '标注',
-    icon: Postcard,
-    path: '/app/annotation',
-  },
-  {
-    name: '审核',
-    icon: Checked,
-    path: '/app/check',
-  },
-  {
-    name: '统计',
-    icon: TrendCharts,
-    path: '/app/statistic',
-  },
-  {
-    name: '管理',
-    icon: Tools,
-    path: '/app/setting',
-  },
-]);
+import { Document, Location, Setting } from '@element-plus/icons-vue';
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
 </script>
 
 <style lang="scss" scoped>
-.menus {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .menu {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    margin-top: 10px;
-  }
-
-  .menu-item {
-    display: flex;
-    flex-direction: column;
-    row-gap: 4px;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.4s;
-
-    .el-icon {
-      transition: color 0.4s;
-    }
-
-    &:hover {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 16px 0 rgb(0 48 121 / 10%);
-
-      .el-icon {
-        color: #38f;
-      }
-    }
-  }
-
-  .router-link-exact-active {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px 0 rgb(0 48 121 / 10%);
-
-    .el-icon {
-      color: #38f;
-    }
-  }
+.el-menu {
+  border: none;
 }
 </style>
