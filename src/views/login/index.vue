@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <div class="login fade-in">
-      <div class="header">前端项目模板</div>
+      <div class="header">标注平台</div>
       <div class="desc">快速、简单、高效、灵活</div>
       <el-form :model="formData">
         <el-form-item>
@@ -25,7 +25,7 @@
         </el-form-item>
         <el-form-item>
           <el-input v-model="formData.code" size="large" placeholder="请输入密码" type="code" autocomplete="off">
-            <template #append><img class="img-code" src="@/assets/images/login/code.jpeg" /></template
+            <template #append> <img class="img-code" src="@/assets/images/login/code.jpeg" /></template
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -56,7 +56,7 @@ const onLogin = () => {
   console.log(formData.password, formData.user);
   isLoading.value = true;
   setTimeout(() => {
-    router.replace('/home');
+    router.replace('/app');
   }, 1500);
 };
 </script>

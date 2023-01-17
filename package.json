@@ -1,7 +1,7 @@
 {
-  "name": "vue-three-template",
-  "description": "vue 3.x版本项目模板,vite 4.x打包构建",
-  "version": "0.0.0",
+  "name": "vue-biaozhu-web",
+  "description": "标注平台",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite",

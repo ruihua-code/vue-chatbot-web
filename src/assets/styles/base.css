@@ -12,8 +12,7 @@ body {
     Arial,
     sans-serif;
   font-size: 14px;
-  background: #fff;
-  transition: color 0.5s, background-color 0.5s;
+  background: #f0f5fa;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
