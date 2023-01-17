@@ -10,10 +10,23 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: HomeView,
+      path: '/app',
+      name: '主结构页面',
+      component: () => import('@/components/app/index.vue'),
+      children: [
+        {
+          path: '/app/file',
+          name: '文件列表',
+          component: () => import('@/views/file/index.vue'),
+        },
+        {
+          path: '/app/apply',
+          name: '我的申请',
+          component: () => import('@/views/apply/index.vue'),
+        },
+      ],
     },
+
     {
       path: '/about',
       name: 'about',
