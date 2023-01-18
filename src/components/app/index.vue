@@ -15,8 +15,8 @@
 </template>
 <script lang="ts" setup>
 import SideMenu from '@/components/side-menu/index.vue';
-import variables from '@/assets/styles/variables.module.scss'
-console.log("----",variables.sideMenuBackgroundColor)
+import variables from '@/assets/styles/variables.module.scss';
+console.log('----', variables.sideMenuBackgroundColor);
 </script>
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.module';

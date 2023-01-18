@@ -1,14 +1,30 @@
 <template>
   <div class="container">
-    <div class="annotation fade-in" ref="annotation"></div>
-    <div class="category" @click="onSelect">
-      <div
-        class="category-item"
-        :data-item="JSON.stringify(item)"
-        v-for="item in categorys"
-        :key="item.id"
-        :style="{ backgroundColor: item.color }">
-        {{ item.text }}
+    <div>
+      <el-checkbox
+        @change="annotationTypeChange"
+        v-model="annotationTypes.ner"
+        label="NER实体标注"
+        size="large"
+        :border="true" />
+      <el-checkbox
+        @change="annotationTypeChange"
+        v-model="annotationTypes.connect"
+        label="支持添加关系"
+        size="large"
+        :border="true" />
+    </div>
+    <div class="annotation-box">
+      <div class="annotation fade-in" ref="annotation"></div>
+      <div class="category" @click="onSelect">
+        <div
+          class="category-item"
+          :data-item="JSON.stringify(item)"
+          v-for="item in categorys"
+          :key="item.id"
+          :style="{ backgroundColor: item.color }">
+          {{ item.text }}
+        </div>
       </div>
     </div>
   </div>
@@ -17,9 +33,21 @@
 <script lang="ts" setup>
 import { ref, onMounted, reactive } from 'vue';
 import { Action, Annotator } from 'poplar-annotation';
-// import Highlighter from 'web-highlighter';
 
-// new Highlighter().run();
+const annotationTypes = ref({
+  ner: true,
+  connect: false,
+});
+
+const connect = ref({
+  from: 0,
+  to: 0,
+});
+
+const annotationTypeChange = () => {
+  init();
+};
+
 const categorys = ref([
   {
     id: 4,
@@ -99,23 +127,36 @@ let currentSelectText = {
   endIndex: 0,
 };
 
+// 选中文本，NER实体标注
 const onSelect = (e: any) => {
+  if (!annotationTypes.value.ner) return;
   if (e.target.className !== 'category-item') return;
   if (currentSelectText.startIndex === 0 && currentSelectText.endIndex === 0) return;
   const cate = JSON.parse(e.target.dataset.item);
   annotator.value.applyAction(Action.Label.Create(cate.id, currentSelectText.startIndex, currentSelectText.endIndex));
 };
+
+const addConnection = () => {
+  annotator.value.applyAction(Action.Connection.Create(1, connect.value.from, connect.value.to));
+};
+
 const annotation = ref();
-onMounted(() => {
+
+// 初始化
+const init = () => {
+  if (annotator.value) {
+    annotator.value.remove();
+  }
   annotator.value = new Annotator(data, annotation.value, {
     labelPadding: 5,
     lineHeight: 3,
-    unconnectedLineStyle: 'none',
+    unconnectedLineStyle: annotationTypes.value.connect ? 'curve' : 'none',
     contentEditable: false,
   });
 
   // 在用户在页面上选取了一段文本后，会触发textSelected事件
   annotator.value.on('textSelected', (startIndex: number, endIndex: number) => {
+    if (!annotationTypes.value.ner) return;
     currentSelectText = { startIndex, endIndex };
     // svg内容选中之后会失去高亮，抛出一个异常可以解决这个问题！！！
     console.clear();
@@ -125,6 +166,19 @@ onMounted(() => {
     // 输出用户点击的label的ID
     console.log(id);
   });
+
+  annotator.value.on('twoLabelsClicked', (first: number, second: number) => {
+    if (!annotationTypes.value.connect) return;
+    // 输出用户选取的两个label的ID
+    console.log(first, second);
+    connect.value.from = first;
+    connect.value.to = second;
+    addConnection();
+  });
+};
+
+onMounted(() => {
+  init();
 });
 </script>
 
@@ -133,7 +187,10 @@ onMounted(() => {
 
 .container {
   height: 600px;
-  border: 1px solid;
+}
+
+.annotation-box {
+  height: 100%;
 }
 
 :deep(.annotation) {
@@ -143,6 +200,7 @@ onMounted(() => {
   height: 100%;
   overflow: hidden;
   overflow-y: auto;
+  border: 1px solid;
 
   svg {
     width: 100%;
@@ -176,6 +234,7 @@ onMounted(() => {
   height: 100%;
   padding: 5px;
   overflow: hidden;
+  border: 1px solid;
   border-left: 1px solid;
 
   &-item {
