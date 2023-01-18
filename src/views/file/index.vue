@@ -1,3 +1,8 @@
 <template>
-  <div>文件列表</div>
+  <div>
+    <YongPoplarAnnotation></YongPoplarAnnotation>
+  </div>
 </template>
+<script lang="ts" setup>
+import YongPoplarAnnotation from '@/components/yong-poplar-annotation/index.vue';
+</script>

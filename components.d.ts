@@ -26,5 +26,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SideMenu: typeof import('./src/components/side-menu/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
+    YongPoplarAnnotation: typeof import('./src/components/yong-poplar-annotation/index.vue')['default']
   }
 }

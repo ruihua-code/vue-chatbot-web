@@ -1895,6 +1895,11 @@ etag@^1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
+events@^3.0.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 execa@^5.0.0:
   version "5.1.1"
   resolved "https://registry.npmmirror.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
@@ -3497,6 +3502,13 @@ pkg-types@^1.0.0, pkg-types@^1.0.1:
     mlly "^1.0.0"
     pathe "^1.0.0"
 
+poplar-annotation@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/poplar-annotation/-/poplar-annotation-2.0.3.tgz#ae7d19fc155f09b07796c221a3af3602ceff0459"
+  integrity sha512-YX+WNjLL0XPY/3Be48+SN/bmerdOG5YurMmo3E3M1qLtWQwEcSqTKh5Cqzdq+PUMJsjHrMni38jW1y2anqKsFw==
+  dependencies:
+    events "^3.0.0"
+
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -4718,6 +4730,11 @@ vue@^3.2.45:
     "@vue/runtime-dom" "3.2.45"
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
+
+web-highlighter@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/web-highlighter/-/web-highlighter-0.7.4.tgz#75b603e58d5c724fe8b4a6c7c86b2a855107f101"
+  integrity sha512-07mWw6ib+Abcr/fuKEWYPy1Y0MsCOz6yUUVw9xMpyt5UzyXWtSlcwzy2YqnccCP/LjtM9MZHQSo3dbGJII8h6w==
 
 webpack-sources@^3.2.3:
   version "3.2.3"
