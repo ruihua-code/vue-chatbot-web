@@ -1,32 +1,45 @@
 <template>
-  <div class="container">
-    <div>
-      <el-checkbox
-        @change="annotationTypeChange"
-        v-model="annotationTypes.ner"
-        label="NER实体标注"
-        size="large"
-        :border="true" />
+  <div class="container fade-in">
+    <div class="operation">
+      <el-checkbox @change="annotationTypeChange" v-model="annotationTypes.ner" label="NER实体标注" :border="true" />
       <el-checkbox
         @change="annotationTypeChange"
         v-model="annotationTypes.connect"
         label="支持添加关系"
-        size="large"
         :border="true" />
+      <el-button type="primary" @click="onSave">保存</el-button>
     </div>
     <div class="annotation-box">
-      <div class="annotation fade-in" ref="annotation"></div>
-      <div class="right-box" @click="onSelect">
-        <div class="category-box">
-          <div
-            class="category-item"
-            :data-item="JSON.stringify(item)"
-            v-for="item in data.labelCategories"
-            :key="item.id"
-            :style="{ backgroundColor: item.color }">
-            {{ item.text }}
-          </div>
-        </div>
+      <div class="annotation" ref="annotation"></div>
+      <div class="right-box">
+        <el-tabs type="border-card" v-model="tabsActiveName" :stretch="true">
+          <el-tab-pane label="实体分类" name="tabCategory">
+            <div class="category-box">
+              <div
+                class="category-item"
+                :data-item="JSON.stringify(item)"
+                v-for="item in data.labelCategories"
+                :key="item.id"
+                :style="{ backgroundColor: item.color }"
+                @click="onSelect">
+                {{ item.text }}
+              </div>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="关系分类" name="tabConnection">
+            <div class="category-box">
+              <div
+                class="category-item"
+                :data-item="JSON.stringify(item)"
+                v-for="item in data.connectionCategories"
+                :key="item.id"
+                @click="onConnection(item)">
+                {{ item.text }}
+              </div>
+            </div></el-tab-pane
+          >
+        </el-tabs>
+
         <div class="labels">
           <div v-for="(item, index) in data.labels" :key="item.id" class="label-item">
             <span>{{ index + 1 }}</span>
@@ -47,13 +60,15 @@
         </div>
       </div>
     </div>
-    <el-button @click="onSave">保存</el-button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, reactive } from 'vue';
 import { Action, Annotator } from 'poplar-annotation';
+import { ElMessage } from 'element-plus';
+const tabsActiveName = ref('tabCategory');
+let currentConnectionId: number = 0;
 const annotationTypes = ref({
   ner: true,
   connect: false,
@@ -175,16 +190,21 @@ let currentSelectText = {
 // 选中文本，NER实体标注
 const onSelect = (e: any) => {
   if (!annotationTypes.value.ner) return;
-  if (e.target.className !== 'category-item') return;
   if (currentSelectText.startIndex === 0 && currentSelectText.endIndex === 0) return;
   const cate = JSON.parse(e.target.dataset.item);
   annotator.value.applyAction(Action.Label.Create(cate.id, currentSelectText.startIndex, currentSelectText.endIndex));
   updateJosn();
 };
 
+// 选择关系类型
+const onConnection = (item: any) => {
+  currentConnectionId = item.id;
+};
+
 const addConnection = () => {
   if (connect.value.from === connect.value.to) return;
-  annotator.value.applyAction(Action.Connection.Create(1, connect.value.from, connect.value.to));
+  annotator.value.applyAction(Action.Connection.Create(currentConnectionId, connect.value.from, connect.value.to));
+  currentConnectionId = 0;
 };
 
 const annotation = ref();
@@ -204,7 +224,11 @@ const init = () => {
   // 在用户在页面上选取了一段文本后，会触发textSelected事件
   annotator.value.on('textSelected', (startIndex: number, endIndex: number) => {
     if (!annotationTypes.value.ner) return;
+    tabsActiveName.value = 'tabCategory';
+    connect.value.from = 0;
+    connect.value.to = 0;
     currentSelectText = { startIndex, endIndex };
+
     // svg内容选中之后会失去高亮，抛出一个异常可以解决这个问题！！！
     console.clear();
     throw new Error('不用担心，这并不是一个报错');
@@ -213,6 +237,8 @@ const init = () => {
     // 输出用户点击的label的ID
     console.log(id, event);
     clearLabelStyle();
+
+    // 选中状态，边框设置为红色
     const target = event.target as HTMLElement;
     if (target.nodeName === 'rect') {
       target.style.stroke = 'red';
@@ -224,8 +250,19 @@ const init = () => {
 
   annotator.value.on('twoLabelsClicked', (first: number, second: number) => {
     if (!annotationTypes.value.connect) return;
+    if (currentConnectionId === 0) {
+      ElMessage({
+        message: '请选择关系类型',
+        type: 'warning',
+      });
+      tabsActiveName.value = 'tabConnection';
+      return;
+    }
+    currentSelectText.startIndex = 0;
+    currentSelectText.endIndex = 0;
+
+    tabsActiveName.value = 'tabConnection';
     // 输出用户选取的两个label的ID
-    console.log(first, second);
     connect.value.from = first;
     connect.value.to = second;
     addConnection();
@@ -274,7 +311,6 @@ const getCategorie = (categoryId: number) => {
 
 const onSave = () => {
   let res = annotator.value.store.json;
-  console.log(annotator.value);
   console.log(JSON.parse(JSON.stringify(res)));
 };
 
@@ -282,8 +318,8 @@ const updateJosn = () => {
   const jsonStr = annotator.value.store.json;
   const json = JSON.parse(JSON.stringify(jsonStr));
   data.labels = json.labels;
-  console.log('data:', data.labels);
 };
+
 onMounted(() => {
   init();
 });
@@ -293,11 +329,22 @@ onMounted(() => {
 @import '@/assets/styles/variables.module';
 
 .container {
-  height: 600px;
+  height: calc(100vh - 20px);
+}
+
+.operation {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .el-checkbox {
+    margin-right: 0;
+  }
 }
 
 .annotation-box {
-  height: 100%;
+  height: calc(100% - 32px);
 }
 
 :deep(.annotation) {
@@ -307,7 +354,6 @@ onMounted(() => {
   height: 100%;
   overflow: hidden;
   overflow-y: auto;
-  border: 1px solid;
 
   svg {
     width: 100%;
@@ -343,10 +389,11 @@ onMounted(() => {
   column-gap: 5px;
   width: 400px;
   height: 100%;
-  padding: 5px;
   overflow: hidden;
-  border: 1px solid;
-  border-left: none;
+
+  .el-tabs {
+    width: 200px;
+  }
 }
 
 .category-box {
@@ -379,8 +426,8 @@ onMounted(() => {
   row-gap: 5px;
   width: 180px;
   padding: 6px;
+  overflow-y: auto;
   font-size: 12px;
-  border: 1px solid;
 
   .label-item {
     display: flex;

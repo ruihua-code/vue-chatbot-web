@@ -46,6 +46,7 @@ console.log('----', variables.sideMenuBackgroundColor);
   }
 
   .main {
+    padding: 10px;
     background: #fff;
   }
 
