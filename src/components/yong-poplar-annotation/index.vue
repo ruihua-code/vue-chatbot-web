@@ -137,6 +137,7 @@ const onSelect = (e: any) => {
 };
 
 const addConnection = () => {
+  if (connect.value.from === connect.value.to) return;
   annotator.value.applyAction(Action.Connection.Create(1, connect.value.from, connect.value.to));
 };
 
@@ -162,9 +163,17 @@ const init = () => {
     console.clear();
     throw new Error('不用担心，这并不是一个报错');
   });
-  annotator.value.on('labelClicked', (id: number) => {
+  annotator.value.on('labelClicked', (id: number, event: MouseEvent) => {
     // 输出用户点击的label的ID
-    console.log(id);
+    console.log(id, event);
+    clearLabelStyle();
+    const target = event.target as HTMLElement;
+    if (target.nodeName === 'rect') {
+      target.style.stroke = 'red';
+    } else {
+      const currentEle = target.previousSibling as HTMLElement;
+      currentEle.style.stroke = 'red';
+    }
   });
 
   annotator.value.on('twoLabelsClicked', (first: number, second: number) => {
@@ -175,6 +184,37 @@ const init = () => {
     connect.value.to = second;
     addConnection();
   });
+
+  annotator.value.on('connectionClicked', (id: number, event: MouseEvent) => {
+    console.log(id, event);
+
+    clearConnectionStyle();
+    // 选中当前元素
+    const currentEle = event.target as HTMLElement;
+    currentEle.style.stroke = 'red';
+  });
+};
+
+// 连接关系清空选中状态
+const clearConnectionStyle = () => {
+  const eles = document.getElementsByClassName('poplar-annotation-connection');
+  if (eles.length > 0) {
+    for (let i = 0; i < eles.length; i++) {
+      const ele = eles[i] as HTMLElement;
+      ele.style.stroke = 'none';
+    }
+  }
+};
+
+// 清空lable选中状态
+const clearLabelStyle = () => {
+  const eles = document.querySelectorAll('.poplar-annotation-label g rect');
+  if (eles.length > 0) {
+    for (let i = 0; i < eles.length; i++) {
+      const ele = eles[i] as HTMLElement;
+      ele.style.stroke = 'none';
+    }
+  }
 };
 
 onMounted(() => {
@@ -221,7 +261,7 @@ onMounted(() => {
   // label hover效果
   .poplar-annotation-label.hover {
     g > rect {
-      stroke: red;
+      stroke: red !important;
     }
   }
 }
