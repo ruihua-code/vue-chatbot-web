@@ -2,8 +2,8 @@
   <el-container class="container">
     <el-aside class="aside fade-in" width="200px">
       <div class="logo">
-        <!-- <SvgIcon name="logo" width="36px" height="36px" /> -->
-        <Logo :width="36" :height="36" />
+        <SvgIcon name="logo" width="36px" height="36px" />
+        <!-- <Logo :width="36" :height="36" /> -->
         <span class="project-name">知识中心</span>
       </div>
       <SideMenu></SideMenu>
