@@ -1,9 +1,10 @@
 <template>
   <el-menu
     :default-active="currentUrl"
-    background-color="#545c64"
-    active-text-color="#ffd04b"
-    text-color="#fff"
+    background-color="transparent"
+    active-text-color="#247AFF"
+    text-color="#333"
+    :collapse="props.isCollapse"
     router
     class="el-menu-vertical-demo"
     unique-opened>
@@ -19,63 +20,67 @@
   </el-menu>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch, defineProps } from 'vue';
 import { useBrowserLocation } from '@vueuse/core';
 import { Folder, Connection, Notebook } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
+
+const props = defineProps({
+  isCollapse: Boolean,
+});
 
 const currentUrl = ref();
 
 const menus = [
   {
     name: '字典管理',
-    index: '/app/dict',
+    index: '/dict',
     icon: Notebook,
     children: [
       {
-        index: '/app/dict/cancer-dict-manage',
+        index: '/dict/cancer-dict-manage',
         name: '癌种字典管理',
       },
       {
-        index: '/app/dict/dict-type-manage',
+        index: '/dict/dict-type-manage',
         name: '字典类型管理',
       },
       {
-        index: '/app/dict/dict-library',
+        index: '/dict/dict-library',
         name: '字典库',
       },
     ],
   },
   {
     name: '配置文件管理',
-    index: '/app/file',
+    index: '/file',
     icon: Folder,
     children: [
       {
-        index: '/app/file/list',
+        index: '/file/list',
         name: '文件列表',
       },
       {
-        index: '/app/file/upload',
+        index: '/file/upload',
         name: '上传文件',
       },
       {
-        index: '/app/file/operation',
+        index: '/file/operation',
         name: '文件管理操作',
       },
     ],
   },
   {
     name: '下载申请',
-    index: '/app/apply',
+    index: '/apply',
     icon: Connection,
     children: [
       {
-        index: '/app/apply/my',
+        index: '/apply/my',
         name: '我的申请',
       },
       {
-        index: '/app/apply/start',
+        index: '/apply/start',
         name: '发起申请',
       },
     ],
@@ -93,6 +98,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.el-menu-vertical-demo {
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .el-menu {
   border: none;
 }

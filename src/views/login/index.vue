@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <div class="login fade-in">
-      <div class="header">标注平台</div>
+      <div class="header">知识中心</div>
       <div class="desc">快速、简单、高效、灵活</div>
       <el-form :model="formData">
         <el-form-item>

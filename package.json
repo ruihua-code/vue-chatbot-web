@@ -1,6 +1,6 @@
 {
-  "name": "vue-biaozhu-web",
-  "description": "标注平台",
+  "name": "knowledge-center-web",
+  "description": "知识中心",
   "version": "0.0.1",
   "private": true,
   "scripts": {

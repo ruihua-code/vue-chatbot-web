@@ -12,47 +12,47 @@ const router = createRouter({
       path: '/app',
       name: '主结构页面',
       component: () => import('@/components/app/index.vue'),
-      redirect: '/app/dict/cancer-dict-manage',
+      redirect: '/dict/cancer-dict-manage',
       children: [
         {
-          path: '/app/dict/cancer-dict-manage',
+          path: '/dict/cancer-dict-manage',
           name: '癌种字典管理',
           component: () => import('@/views/dict/cancer-dict-manage/index.vue'),
         },
         {
-          path: '/app/dict/dict-type-manage',
+          path: '/dict/dict-type-manage',
           name: '字典类型管理',
           component: () => import('@/views/dict/dict-type-manage/index.vue'),
         },
         {
-          path: '/app/dict/dict-library',
+          path: '/dict/dict-library',
           name: '字典库',
           component: () => import('@/views/dict/dict-library/index.vue'),
         },
 
         {
-          path: '/app/file/list',
+          path: '/file/list',
           name: '文件列表',
           component: () => import('@/views/file/list/index.vue'),
         },
         {
-          path: '/app/file/upload',
+          path: '/file/upload',
           name: '上传文件',
           component: () => import('@/views/file/upload/index.vue'),
         },
         {
-          path: '/app/file/operation',
+          path: '/file/operation',
           name: '文件管理操作',
           component: () => import('@/views/file/operation/index.vue'),
         },
 
         {
-          path: '/app/apply/my',
+          path: '/apply/my',
           name: '我的申请',
           component: () => import('@/views/download-apply/my-apply/index.vue'),
         },
         {
-          path: '/app/apply/start',
+          path: '/apply/start',
           name: '发起申请',
           component: () => import('@/views/download-apply/apply/index.vue'),
         },
