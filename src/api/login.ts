@@ -1,7 +1,7 @@
 import http from './http';
 
 const loginApi = {
-  login: (data: Record<string, any>) => http.post('/api/login', data, { showLoading: true }),
+  completion: (data: Record<string, any>) => http.post('/completion', data, { showLoading: true }),
 };
 
-export const { login } = loginApi;
+export const { completion } = loginApi;

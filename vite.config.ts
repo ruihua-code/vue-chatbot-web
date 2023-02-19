@@ -12,7 +12,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
 
 const port = 8082;
-const base = '/demo/';
+const base = '/chatbot/';
 console.log('当前环境:', process.env.NODE_ENV);
 
 // https://vitejs.dev/config/
@@ -69,7 +69,7 @@ export default defineConfig({
     port,
     open: `http://localhost:${port}${base}`,
     proxy: {
-      '/api': 'http://localhost:3001',
+      '/completion': 'https://n1.xschao.com',
     },
   },
 });

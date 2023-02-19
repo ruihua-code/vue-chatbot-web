@@ -2,6 +2,7 @@ body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  overflow: hidden;
   font-family:
     'Helvetica Neue',
     Helvetica,
@@ -11,8 +12,9 @@ body {
     '微软雅黑',
     Arial,
     sans-serif;
-  font-size: 14px;
+  font-size: 22px;
   background: #fff;
+  background-color: #eee;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -45,24 +47,10 @@ body {
   background-color: #eaeaea;
 }
 
-.http-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px !important;
-  height: 50px !important;
-  margin: 0 auto !important;
+.el-loading-spinner .el-loading-text {
+  font-size: 32px;
 }
 
-.http-loading .el-loading-spinner {
-  display: flex;
-  column-gap: 10px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%);
-}
-
-.http-loading .circular {
-  width: 28px !important;
+.el-loading-spinner {
+  top: calc(50% - 70px);
 }
