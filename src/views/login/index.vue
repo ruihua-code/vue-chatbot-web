@@ -1,6 +1,5 @@
 <template>
   <div class="page-container fade-in">
-    <!-- <header class="header">基于ChatGPT的AI助手</header> -->
     <main class="main">
       <template v-for="(item, index) in list" :key="index">
         <component
@@ -31,7 +30,7 @@ interface MessaegType {
 const list = reactive<Array<MessaegType>>([
   {
     type: 0,
-    message: '您好，我是AI助理，开源于：https://github.com/869413421/chatgpt-web。',
+    message: '您好，我是AI助理，有什么可以帮助您吗？',
   },
 ]);
 
