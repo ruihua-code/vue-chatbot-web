@@ -38,7 +38,6 @@ instance.interceptors.request.use((config: Config) => {
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     loadingInstance.close();
-    console.log('返回结果:', response);
     if (response.status === 200) {
       /* 处理下载相关接口 */
       if (response.data instanceof Blob || response.data instanceof ArrayBuffer) {

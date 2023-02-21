@@ -1,6 +1,6 @@
 <template>
   <div class="page-container fade-in">
-    <header class="header">基于ChatGPT的AI助手</header>
+    <!-- <header class="header">基于ChatGPT的AI助手</header> -->
     <main class="main">
       <template v-for="(item, index) in list" :key="index">
         <component
@@ -9,7 +9,11 @@
       </template>
     </main>
     <footer class="footer">
-      <el-input @keyup.enter="onSend" placeholder="请输入..." clearable v-model="inputText" />
+      <el-input @keyup.enter="onSend" placeholder="请输入..." clearable v-model="inputText">
+        <template #append>
+          <el-button type="primary" @click="onSend">发送</el-button>
+        </template>
+      </el-input>
     </footer>
   </div>
 </template>
@@ -80,10 +84,9 @@ const onSend = () => {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 165px);
   padding: 20px;
   padding-bottom: 100px;
-  margin-top: 88px;
   overflow-y: auto;
 }
 
@@ -107,6 +110,18 @@ const onSend = () => {
 
   :deep(.el-input__inner) {
     height: 99px;
+  }
+
+  .el-button {
+    width: 200px;
+    height: 99px;
+    color: #fff;
+    background-color: $primary-color;
+
+    &:hover {
+      color: #fff;
+      background-color: $primary-color;
+    }
   }
 }
 </style>

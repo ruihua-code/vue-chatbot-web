@@ -52,5 +52,5 @@ body {
 }
 
 .el-loading-spinner {
-  top: calc(50% - 70px);
+  top: calc(50% - 100px);
 }
